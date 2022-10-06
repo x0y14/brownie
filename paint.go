@@ -28,7 +28,7 @@ func (w *Window) paint(screen *ebiten.Image, model *BoxModel, x, y float64) erro
 			b := text.BoundString(*DefaultFace, content.text)
 
 			op := &ebiten.DrawImageOptions{}
-			op.GeoM.Translate(paintX, paintY)
+			op.GeoM.Translate(paintX, paintY+float64(b.Dy()))
 			op.ColorM.Reset()
 			//op.GeoM.Translate(400, 200)
 			op.ColorM.ScaleWithColor(color.White)

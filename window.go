@@ -25,7 +25,7 @@ func (w *Window) Draw(screen *ebiten.Image) {
 		log.Fatalf("failed to paint web page: %v", err)
 	}
 
-	//ebitenutil.DebugPrint(screen, fmt.Sprintf("fps: %v", ebiten.CurrentFPS()))
+	//ebitenutil.DebugPrint(screen, fmt.Sprintf("fps: %v", ebiten.ActualFPS()))
 	//if err != nil {
 	//	log.Fatalf("faield to print fps: %v", err)
 	//}
