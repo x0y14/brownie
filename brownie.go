@@ -2,34 +2,20 @@ package brownie
 
 import (
 	"fmt"
-	"github.com/hajimehoshi/ebiten"
-	"github.com/x0y14/dragon/html/parser"
-	"github.com/x0y14/dragon/html/tokenizer"
+	"github.com/hajimehoshi/ebiten/v2"
 	"log"
 )
 
 func OpenWebSite(url string) error {
-	rawHtml, err := getHtmlFromUrl(url)
+	//wp, err := GetWebPageFromUrl(url)
+	wp, err := GetWebPageFromPath("/Users/x0y14/dev/brownie/test.html")
 	if err != nil {
-		return fmt.Errorf("failed to get html: %v", err)
+		return fmt.Errorf("failed to get webpage: %v", err)
 	}
 
-	tokenizer_ := tokenizer.NewTokenizer()
-	tokens, err := tokenizer_.Tokenize([]rune(rawHtml))
-	if err != nil {
-		return fmt.Errorf("failed to tokenize: %v", err)
-	}
-
-	parser_ := parser.NewParser()
-	_, err = parser_.Parse(tokens)
-	if err != nil {
-		return fmt.Errorf("failed to parse: %v", err)
-	}
-
-	w := &Window{}
-
+	w := &Window{webpage: wp}
 	ebiten.SetWindowSize(800, 600)
-	ebiten.SetWindowResizable(true)
+	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 	ebiten.SetWindowTitle("brownie")
 	if err := ebiten.RunGame(w); err != nil {
 		log.Fatal(err)
